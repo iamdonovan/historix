@@ -1,0 +1,28 @@
+name: spymicmac
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10
+  - scikit-image
+  - geopandas
+  - geoutils
+  - xdem
+  - opencv
+  - lxml
+  - gdal
+  - pdal
+  - pyasn1
+  - numba
+  - earthengine-api
+  - imagemagick
+  - exiftool
+  - pillow
+  - rtree
+  - sphinx
+  - sphinx-argparse
+  - sphinx-book-theme
+  - sphinx-copybutton
+  - pip
+  - pip:
+      - "git+https://github.com/kapadia/usgs.git"
