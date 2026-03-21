@@ -6,6 +6,14 @@
 *.tif
 *.ply
 
+Homol/
+Homol_SRes/
+Homol_mini/
+MEC-*/
+Pastis/
+Pyram/
+Tmp-MM-Dir/
+
 *.aux.xml
 *.qgz
 
