@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import subprocess
 from glob import glob
 from pathlib import Path
