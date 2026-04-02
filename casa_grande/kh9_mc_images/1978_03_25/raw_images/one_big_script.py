@@ -14,7 +14,7 @@ fn_ref = Path('..', '..', '..', 'aux_dems', f"{prefix}_reference_dem_large.tif")
 
 # preprocess images
 preprocessing.preprocess_kh9_mc(
-    skip='balance',
+    option=['balance'],
     nproc='max',
     scale=140,
     blend=True,
