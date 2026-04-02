@@ -1,0 +1,7 @@
+code,ori_final,fn_cam,notes/details
+USMM_CG_AI_PP_CY_GM_PN_MN_v1,TerrainRadialBasic,AutoCal_Foc-152865_Cam-WildRC10.xml,RadialBasic with given GCPs
+USMM_CG_AI_PP_CY_GM_PN_MN_v2,TerrainRadialExtended,AutoCal_Foc-152865_Cam-WildRC10.xml,RadialExtended with given GCPs
+USMM_CG_AI_PP_CY_GM_PN_MN_v3,TerrainFraserBasic,AutoCal_Foc-152865_Cam-WildRC10.xml,FraserBasic with given GCPs
+USMM_CG_AI_PP_CY_GM_PN_MN_v4,TerrainFraserExtended,AutoCal_Foc-152865_Cam-WildRC10.xml,FraserExtended with given GCPs
+USMM_CG_AI_PP_CY_GA_PN_MN_v1,TerrainFinal_FraserExtended_ortho,AutoCal_Foc-152865_Cam-WildRC10.xml,FraserExtended with GCPs from zoom orthoimage
+USMM_CG_AI_PP_CY_GA_PN_MN_v2,TerrainFinal_FraserExtended_dem,AutoCal_Foc-152865_Cam-WildRC10.xml,FraserExtended with GCPs from zoom DEM
