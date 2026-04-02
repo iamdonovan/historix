@@ -14,6 +14,9 @@ Pastis/
 Pyram/
 Tmp-MM-Dir/
 
+Basc-*.xml
+mm3d-LogFile.txt
+
 *.aux.xml
 *.qgz
 
