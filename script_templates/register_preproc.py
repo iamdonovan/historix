@@ -46,6 +46,7 @@ if not Path(f"MEC-Rel{ori}").exists():
 register.register_relative(
     f"MEC-Rel{ori}",
     fn_ref,
+    globstr=globstr,
     glacmask=glacmask,
     landmask=landmask,
     ori=ori,
@@ -53,29 +54,4 @@ register.register_relative(
     strategy='peaks',
     use_hillshade=True,
     subscript=ori
-)
-
-# create the absolute dem/orthophotos
-#TODO: check if this is too big and iterate if needed
-micmac.malt(
-    globstr.replace('*.', '.*'),
-    f"TerrainFinal_{ori}",
-    dirmec=f"MEC-{ori}",
-    zoomf=1,
-    cost_trans=4,
-    szw=3,
-    regul=0.1
-)
-
-# create the orthomosaic
-if do_ortho:
-    micmac.tawny(f"MEC-{ori}")
-
-# clean up the outputs
-micmac.post_process(
-    projstr=local_crs,
-    out_name=out_name,
-    dirmec=f"MEC-{ori}",
-    do_ortho=True,
-    ind_ortho=False
 )
