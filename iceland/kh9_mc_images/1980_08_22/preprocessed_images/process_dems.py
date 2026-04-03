@@ -11,7 +11,7 @@ do_ortho = False # whether to make the ortho images
 # update orientation names as needed
 for ori in ['RadialBasic', 'RadialExtended', 'FraserBasic', 'FraserExtended', 'Final_FraserExtended']:
 
-    malt_args = {
+    malt_kwargs = {
         'dirmec': f"MEC-{ori}",
         'zoomf': 1,
         'cost_trans': 4,
@@ -27,7 +27,7 @@ for ori in ['RadialBasic', 'RadialExtended', 'FraserBasic', 'FraserExtended', 'F
         imlist,
         ori,
         nimg=2,
-        malt_args=malt_args
+        malt_kwargs=malt_kwargs
     )
 
     for block in len(glob(f"MEC-{ori}_block*/")):
