@@ -3,9 +3,9 @@ from glob import glob
 from spymicmac import micmac
 
 
-globstr = 'DZB*.tif' # fill in image pattern
-local_crs = 32627 # need to fill in the crs to use
-prefix = 'IL' # fill in prefix for study site
+globstr = '' # fill in image pattern
+local_crs = '' # need to fill in the crs to use
+prefix = '' # fill in prefix for study site
 do_ortho = False # whether to make the ortho images
 
 # update orientation names as needed

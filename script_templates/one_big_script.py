@@ -58,26 +58,34 @@ register.register_relative(
     use_hillshade=True
 )
 
+malt_args = {
+    'dirmec': 'MEC-Malt',
+    'zoomf': 1,
+    'cost_trans': 4,
+    'szw': 3,
+    'regul': 0.1,
+    'do_ortho': True
+}
+
 # create the absolute dem/orthophotos
-#TODO: check if this is too big and iterate if needed
-micmac.malt(
-    'OIS.*tif',
-    'TerrainFinal',
-    dirmec='MEC-Malt',
-    zoomf=1,
-    cost_trans=4,
-    szw=3,
-    regul=0.1
+# TODO: check if this is too big and iterate if needed
+imlist = sorted(glob('OIS*.tif'))
+micmac.block_malt(
+    imlist,
+    ori='TerrainFinal',
+    nimg=2,
+    malt_args=malt_args
 )
 
 # create the orthomosaic
-micmac.tawny('MEC-Malt')
+#micmac.tawny('MEC-Malt')
 
 # clean up the outputs
-micmac.post_process(
-    projstr=local_crs,
-    out_name=out_name,
-    dirmec='MEC-Malt',
-    do_ortho=True,
-    ind_ortho=False
-)
+for block in len(glob('MEC-Malt*block*/')):
+    micmac.post_process(
+        projstr=local_crs,
+        out_name=out_name,
+        dirmec=f"MEC-Malt_block{block}",
+        do_ortho=True,
+        ind_ortho=False
+    )
