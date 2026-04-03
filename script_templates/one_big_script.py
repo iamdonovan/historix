@@ -11,6 +11,7 @@ prefix = ''
 glacmask = None # fill in path to optional glacier mask
 landmask = Path('..', '..', '..', 'aux_dems', f"{prefix}_reference_dem_large_mask.tif") # fill in path to optional land mask
 fn_ref = Path('..', '..', '..', 'aux_dems', f"{prefix}_reference_dem_large.tif") # fill in path to optional land mask
+do_ortho = False
 
 # preprocess images
 preprocessing.preprocess_kh9_mc(
@@ -64,7 +65,7 @@ malt_args = {
     'cost_trans': 4,
     'szw': 3,
     'regul': 0.1,
-    'do_ortho': True
+    'do_ortho': do_ortho
 }
 
 # create the absolute dem/orthophotos
@@ -77,15 +78,16 @@ micmac.block_malt(
     malt_args=malt_args
 )
 
-# create the orthomosaic
-#micmac.tawny('MEC-Malt')
-
 # clean up the outputs
 for block in len(glob('MEC-Malt*block*/')):
+    # create the orthomosaic
+    if do_ortho:
+        micmac.tawny(f"MEC-Malt_block{block}")
+
     micmac.post_process(
         projstr=local_crs,
         out_name=out_name,
         dirmec=f"MEC-Malt_block{block}",
-        do_ortho=True,
+        do_ortho=do_ortho,
         ind_ortho=False
     )
