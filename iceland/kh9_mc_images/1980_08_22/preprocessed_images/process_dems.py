@@ -30,16 +30,16 @@ for ori in ['RadialBasic', 'RadialExtended', 'FraserBasic', 'FraserExtended', 'F
         malt_kwargs=malt_kwargs
     )
 
-    for block in len(glob(f"MEC-{ori}_block*/")):
+    for ind, block in enumerate(glob(f"MEC-{ori}_block*/")):
         # create the orthomosaic
         if do_ortho:
-            micmac.tawny(f"MEC-{ori}")
+            micmac.tawny(block)
 
         # clean up the outputs
         micmac.post_process(
             projstr=local_crs,
-            out_name=f"Terrain{ori}_block{block}",
-            dirmec=f"MEC-{ori}_block{block}",
+            out_name=f"Terrain{ori}_block{ind}",
+            dirmec=block,
             do_ortho=do_ortho,
             ind_ortho=False,
             do_ply=True

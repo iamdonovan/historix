@@ -79,15 +79,17 @@ micmac.block_malt(
 )
 
 # clean up the outputs
-for block in len(glob('MEC-Malt*block*/')):
+for ind, block in enumerate(glob(f"MEC-Malt_block*/")):
     # create the orthomosaic
     if do_ortho:
-        micmac.tawny(f"MEC-Malt_block{block}")
+        micmac.tawny(block)
 
+    # clean up the outputs
     micmac.post_process(
         projstr=local_crs,
-        out_name=out_name,
-        dirmec=f"MEC-Malt_block{block}",
+        out_name=f"{out_name}_block{ind}",
+        dirmec=block,
         do_ortho=do_ortho,
-        ind_ortho=False
+        ind_ortho=False,
+        do_ply=True
     )
