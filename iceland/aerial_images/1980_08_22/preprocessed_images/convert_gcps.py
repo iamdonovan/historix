@@ -1,7 +1,9 @@
 import subprocess
+import re
 from glob import glob
 from pathlib import Path
 import pandas as pd
+import geopandas as gpd
 import numpy as np
 import lxml.etree as etree
 import lxml.builder as builder
@@ -10,7 +12,6 @@ from spymicmac import micmac
 
 
 def convert_gcp_measures_csv(fn_csv):
-
     gcps = pd.read_csv(fn_csv)
 
     with open('GCPs.txt', 'w') as f:
@@ -25,9 +26,9 @@ def convert_gcp_measures_csv(fn_csv):
 
     E = builder.ElementMaker()
     MesureSet = E.SetOfMesureAppuisFlottants()
-    
-    imlist = gcps['image_file_name'].unique().tolist() 
-    
+
+    imlist = gcps['image_file_name'].unique().tolist()
+
     for im in imlist:
         this_im_mes = E.MesureAppuiFlottant1Im(E.NameIm(im))
 
@@ -35,7 +36,6 @@ def convert_gcp_measures_csv(fn_csv):
             this_mes = E.OneMesureAF1I(E.NamePt(str(row['gcp_label'])),
                                        E.PtIm(f"{row['x']} {row['y']}"))
             this_im_mes.append(this_mes)
-
 
         MesureSet.append(this_im_mes)
 
@@ -65,3 +65,11 @@ micmac.create_localchantier_xml(
 )
 
 convert_gcp_measures_csv('gcp.csv')
+
+footprints = gpd.read_file(Path('..', 'images_footprint.geojson'))
+cols = footprints.columns
+new_cols = [re.sub(' +', ' ', col) for col in cols] # remove extra spaces in column names
+footprints.rename(columns=dict(zip(cols, new_cols)), inplace=True)
+
+footprints['ID'] = footprints['Entity ID']
+footprints.to_file('Footprints.gpkg')
