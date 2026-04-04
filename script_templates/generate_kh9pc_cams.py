@@ -1,5 +1,6 @@
 import subprocess
 from pathlib import Path
+import re
 import geopandas as gpd
 from spymicmac import asp, data
 
@@ -14,8 +15,13 @@ masked_dem.to_file('dem_cropped.tif')
 p = subprocess.Popen(['dem_mosaic', '--dem-blur-sigma', '5', 'dem_cropped.tif', '-o', 'dem_blur.tif'])
 p.wait()
 
-footprints = gpd.read_file(fn_footprints)
+footprints = gpd.read_file(Path('..', 'images_footprint.geojson'))
+cols = footprints.columns
+new_cols = [re.sub(' +', ' ', col) for col in cols] # remove extra spaces in column names
+footprints.rename(columns=dict(zip(cols, new_cols)), inplace=True)
+
 footprints['ID'] = footprints['Entity ID']
+footprints.to_file('Footprints.gpkg')
 
 for fn_img in footprints['ID']:
     if asp._isaft(fn_img):
