@@ -19,8 +19,24 @@ submission_files/
 Basc-*.xml
 mm3d-LogFile.txt
 
+id_fiducial.txt
+Tmp-SL-Glob.xml
+SauvApero.xml
+WarnApero.txt
+Schnaps_poubelle.txt
+
+slurm*.out
 *.aux.xml
 *.qgz
+
+# files provided with experiment data
+calibration_report.pdf
+camera_model_extrinsics.csv
+camera_model_intrinsics.csv
+images_footprint.geojson
+detected_fiducial_markers.csv
+gcp.csv
+targets_locations.csv
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
