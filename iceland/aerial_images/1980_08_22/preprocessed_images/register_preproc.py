@@ -45,6 +45,7 @@ if not Path(f"MEC-Rel{ori}").exists():
 register.register_relative(
     f"MEC-Rel{ori}",
     fn_ref,
+    globstr=globstr,
     glacmask=glacmask,
     landmask=landmask,
     ori=ori,
