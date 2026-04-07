@@ -4,16 +4,15 @@ from glob import glob
 from spymicmac import micmac, register
 
 
-globstr = '' # fill in image pattern
-local_crs = None # need to fill in the crs to use
-out_name = '' # fill in prefix for final files
-prefix = '' # fill in prefix for study site
-do_ortho = False # whether to make the ortho images
+globstr = 'F-*.tif' # fill in image pattern
+local_crs = 32627 # need to fill in the crs to use
+prefix = 'IL' # fill in prefix for study site
+do_ortho = True # whether to make the ortho images
 ori = 'FraserExtended' # change orientation directory if needed
 
 glacmask = None # fill in path to optional glacier mask
-fn_ref_pre = Path('..', '..', '..', 'aux_orthos') # fill in path to reference ortho folder
-fn_dem_pre = Path('..', '..', '..', 'aux_dems') # fill in path to reference dem folder
+fn_ref_pre = Path('..', '..', '..', 'aux_orthos') # fill in path to optional land mask
+fn_dem_pre = Path('..', '..', '..', 'aux_dems') # fill in path to optional land mask
 
 # create the relative dem/orthophoto
 if not Path(f"MEC-Rel{ori}").exists():
@@ -49,7 +48,6 @@ if not Path(f"MEC-Rel{ori}").exists():
     )
 
 for zoom in ['large', 'zoom']:
-    fn_ref = fn_ref_pre / f"{prefix}_orthomosaic_{zoom}.tif"
     fn_dem = fn_dem_pre / f"{prefix}_reference_dem_{zoom}.tif"
     landmask = fn_dem_pre / f"{prefix}_reference_dem_{zoom}_mask.tif"
 
@@ -57,7 +55,6 @@ for zoom in ['large', 'zoom']:
     register.register_relative(
         f"MEC-Rel{ori}",
         fn_dem,
-        fn_ref = fn_ref,
         useortho = True,
         globstr = globstr,
         glacmask = glacmask,
@@ -65,7 +62,7 @@ for zoom in ['large', 'zoom']:
         ori = ori,
         density = 200,
         strategy = 'peaks',
-        use_hillshade = False,
-        subscript = f"{ori}_{zoom}",
-        rap_txt = f"TerrainFinal_{ori}_{zoom}_rapport.txt"
+        use_hillshade = True,
+        subscript = f"{ori}_{zoom}_dem",
+        rap_txt = f"TerrainFinal_{ori}_{zoom}_dem_rapport.txt"
     )
