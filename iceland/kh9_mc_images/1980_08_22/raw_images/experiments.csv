@@ -1,2 +1,3 @@
 code,ori_final,fn_cam,notes/details
-USMM_IL_MC_PP_CY_GA_PN_MN,TerrainFinal,AutoCal_Foc-304800_Cam-KH9MC.xml,FraserExtended with GCPs from large DEM
+USMM_IL_MC_PP_CY_GA_PN_MN_v1,TerrainFinal_dem,AutoCal_Foc-304800_Cam-KH9MC.xml,FraserExtended with GCPs from large DEM
+USMM_IL_MC_PP_CY_GA_PN_MN_v2,TerrainFinal_ortho,AutoCal_Foc-304800_Cam-KH9MC.xml,FraserExtended with GCPs from large ortho
