@@ -67,9 +67,5 @@ micmac.create_localchantier_xml(
 convert_gcp_measures_csv('gcp.csv')
 
 footprints = gpd.read_file(Path('..', 'images_footprint.geojson'))
-cols = footprints.columns
-new_cols = [re.sub(' +', ' ', col) for col in cols] # remove extra spaces in column names
-footprints.rename(columns=dict(zip(cols, new_cols)), inplace=True)
-
-footprints['ID'] = footprints['Entity ID']
+footprints['ID'] = footprints['Image ID']
 footprints.to_file('Footprints.gpkg')
