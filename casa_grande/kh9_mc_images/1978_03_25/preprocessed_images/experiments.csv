@@ -3,4 +3,4 @@ USMM_CG_MC_PP_CY_GM_PN_MN_v1,TerrainRadialBasic,AutoCal_Foc-304800_Cam-KH9MC.xml
 USMM_CG_MC_PP_CY_GM_PN_MN_v2,TerrainRadialExtended,AutoCal_Foc-304800_Cam-KH9MC.xml,RadialExtended with given GCPs
 USMM_CG_MC_PP_CY_GM_PN_MN_v3,TerrainFraserBasic,AutoCal_Foc-304800_Cam-KH9MC.xml,FraserBasic with given GCPs
 USMM_CG_MC_PP_CY_GM_PN_MN_v4,TerrainFraserExtended,AutoCal_Foc-304800_Cam-KH9MC.xml,FraserExtended with given GCPs
-USMM_CG_MC_PP_CY_GA_PN_MN,TerrainFinal_FraserExtended_dem,AutoCal_Foc-304800_Cam-KH9MC.xml,FraserExtended with GCPs from large DEM
+USMM_CG_MC_PP_CY_GA_PN_MN,TerrainFinal_FraserExtended,AutoCal_Foc-304800_Cam-KH9MC.xml,FraserExtended with GCPs from large DEM
