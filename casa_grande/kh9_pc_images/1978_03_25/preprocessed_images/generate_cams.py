@@ -6,6 +6,8 @@ from spymicmac import asp, data
 
 
 prefix = 'CG'
+map_res = 12 # resolution to project images to
+
 fn_dem = Path('..', '..', '..', 'aux_dems', f"{prefix}_reference_dem_large.tif") # fill in path to optional land mask
 fn_footprints = Path('..', 'images_footprint.geojson')
 
@@ -37,6 +39,6 @@ for fn_img in footprints['ID']:
         fn_dem = 'dem_blur.tif',
         fn_img = fn_img + '.tif',
         fn_cam = fn_img + '.tsai',
-        res = 10,
+        res = map_res,
         fn_out = fn_img + '.map-init.tif'
     )
