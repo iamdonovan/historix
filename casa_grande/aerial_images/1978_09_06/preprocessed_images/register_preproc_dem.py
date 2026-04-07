@@ -52,5 +52,6 @@ register.register_relative(
     density=200,
     strategy='peaks',
     use_hillshade=True,
-    subscript=ori
+    subscript=f"{ori}_dem",
+    rap_txt=f"TerrainFinal_{ori}_dem_rapport.txt"
 )

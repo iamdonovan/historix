@@ -12,7 +12,8 @@ ori = 'FraserExtended' # change orientation directory if needed
 
 glacmask = None # fill in path to optional glacier mask
 landmask = Path('..', '..', '..', 'aux_dems', f"{prefix}_reference_dem_large_mask.tif") # fill in path to optional land mask
-fn_ref = Path('..', '..', '..', 'aux_dems', f"{prefix}_reference_dem_large.tif") # fill in path to optional land mask
+fn_ref = Path('..', '..', '..', 'aux_ortho', f"{prefix}_reference_dem_large.tif") # fill in path to optional land mask
+
 
 # create the relative dem/orthophoto
 if not Path(f"MEC-Rel{ori}").exists():
@@ -52,5 +53,6 @@ register.register_relative(
     density=200,
     strategy='peaks',
     use_hillshade=True,
-    subscript=ori
+    subscript=ori,
+    rap_txt=f"TerrainFinal_{ori}_rapport.txt"
 )
