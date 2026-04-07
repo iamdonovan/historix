@@ -44,7 +44,8 @@ for cam in models:
         outori='Terrain' + cam,
         allfree=True,
         sig_abs=5,
-        sig_pix=1
+        sig_pix=1,
+        rap_txt=f"Terrain{cam}_rapport.txt"
     )
 
     gcps['camp_xy'] = np.sqrt(gcps.camp_xres ** 2 + gcps.camp_yres ** 2)

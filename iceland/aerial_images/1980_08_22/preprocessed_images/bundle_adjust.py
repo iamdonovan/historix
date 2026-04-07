@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 from pathlib import Path
 import pandas as pd
@@ -43,7 +44,8 @@ for cam in models:
         outori='Terrain' + cam,
         allfree=True,
         sig_abs=1,
-        sig_pix=0.5
+        sig_pix=0.5,
+        rap_txt=f"Terrain{cam}_rapport.txt"
     )
 
     gcps['camp_xy'] = np.sqrt(gcps.camp_xres ** 2 + gcps.camp_yres ** 2)

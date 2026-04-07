@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 from pathlib import Path
 import pandas as pd
@@ -20,7 +21,7 @@ gcps = gpd.GeoDataFrame(gcps, geometry=gpd.points_from_xy(gcps.x, gcps.y, crs=cr
 gcps.drop(columns=['x', 'y']).to_file('GCPs.gpkg')
 
 for cam in models:
-    gcps = gpd.read_file('GCPs.gpkg', crs=crs)
+    gcps = gpd.read_file('GCPs.gpkg')
     gcps = micmac.bascule(
         gcps,
         outdir='.',
@@ -43,7 +44,8 @@ for cam in models:
         outori='Terrain' + cam,
         allfree=True,
         sig_abs=5,
-        sig_pix=1
+        sig_pix=1,
+        rap_txt=f"Terrain{cam}_rapport.txt"
     )
 
     gcps['camp_xy'] = np.sqrt(gcps.camp_xres ** 2 + gcps.camp_yres ** 2)
