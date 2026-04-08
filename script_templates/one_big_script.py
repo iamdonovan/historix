@@ -85,7 +85,8 @@ malt_args = {
     'cost_trans': 4,
     'szw': 3,
     'regul': 0.1,
-    'do_ortho': do_ortho
+    'do_ortho': do_ortho,
+    'clean': True
 }
 
 # create the absolute dem/orthophotos

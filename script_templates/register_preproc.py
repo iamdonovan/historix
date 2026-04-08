@@ -26,7 +26,8 @@ if not Path(f"MEC-Rel{ori}").exists():
         cost_trans=4,
         szw=3,
         regul=0.1,
-        do_ortho=do_ortho
+        do_ortho=do_ortho,
+        clean=True
     )
 
     if do_ortho:

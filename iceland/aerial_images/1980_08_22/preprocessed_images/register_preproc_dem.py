@@ -25,7 +25,8 @@ if not Path(f"MEC-Rel{ori}").exists():
         cost_trans=4,
         szw=3,
         regul=0.1,
-        do_ortho=do_ortho
+        do_ortho=do_ortho,
+        clean=True
     )
 
     if do_ortho:
@@ -42,8 +43,9 @@ if not Path(f"MEC-Rel{ori}").exists():
             dirname=f"Ortho-MEC-Rel{ori}",
         )
 
+    fn_malt = register._get_last_malt(f"MEC-Rel{ori}")
     micmac.mosaic_micmac_tiles(
-        filename='Z_Num8_DeZoom2_STD-MALT',
+        filename=fn_malt,
         dirname=f"MEC-Rel{ori}"
     )
 
