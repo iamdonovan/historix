@@ -18,9 +18,9 @@ def main():
                         help='Prefix for the HISTORIX test cite (should be either CG or IL).')
     parser.add_argument('out_dir', action='store', type=str,
                         help='Output directory for results.')
-    parser.add_argument('--do_ortho', action='store_true', type=bool,
+    parser.add_argument('--do_ortho', action='store_true',
                         help='Process ortho images as part of Malt (default: False).')
-    parser.add_argument('--as_block', action='store_true', type=bool,
+    parser.add_argument('--as_block', action='store_true',
                         help='Process using spymicmac.block_malt (default: False).')
 
     args = parser.parse_args()
