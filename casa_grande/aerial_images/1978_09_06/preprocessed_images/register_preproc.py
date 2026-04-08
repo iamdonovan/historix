@@ -11,8 +11,8 @@ do_ortho = True # whether to make the ortho images
 ori = 'FraserExtended' # change orientation directory if needed
 
 glacmask = None # fill in path to optional glacier mask
-fn_ref_pre = Path('..', '..', '..', 'aux_orthos') # fill in path to optional land mask
-fn_dem_pre = Path('..', '..', '..', 'aux_dems') # fill in path to optional land mask
+fn_ref_pre = Path('..', '..', '..', 'aux_orthos') # fill in path to reference ortho folder
+fn_dem_pre = Path('..', '..', '..', 'aux_dems') # fill in path to reference dem folder
 
 # create the relative dem/orthophoto
 if not Path(f"MEC-Rel{ori}").exists():
@@ -25,7 +25,8 @@ if not Path(f"MEC-Rel{ori}").exists():
         cost_trans=4,
         szw=3,
         regul=0.1,
-        do_ortho=do_ortho
+        do_ortho=do_ortho,
+        clean=True
     )
 
     if do_ortho:
@@ -41,7 +42,6 @@ if not Path(f"MEC-Rel{ori}").exists():
             filename = 'Orthophotomosaic',
             dirname=f"Ortho-MEC-Rel{ori}",
         )
-
 
     micmac.mosaic_micmac_tiles(
         filename='Z_Num8_DeZoom2_STD-MALT',
