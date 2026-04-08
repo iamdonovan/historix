@@ -90,6 +90,18 @@ for experiment in experiments_df.itertuples():
     # now, convert the .ply files using pdal
     fn_dense_ply = Path('post_processed', f"Terrain{experiment.ori_final}.ply")
 
+    if not Path('post_processed', f"Terrain{experiment.ori_final}.ply").exists():
+
+        if len(glob(f"Terrain{experiment.ori_final}_block*.ply", root_dir='post_processed')) > 0:
+            block_ply = sorted(glob(f"Terrain{experiment.ori_final}_block*.ply", root_dir='post_processed'))
+
+            merge_args = ['pdal', 'translate']
+            merge_args.extend([Path('post_processed', fn) for fn in block_ply])
+            merge_args.append(fn_dense_ply)
+
+            p = subprocess.Popen(merge_args, stdout=subprocess.PIPE)
+            p.wait()
+
     translate_args = ['pdal', 'translate', fn_dense_ply,
                       Path('submission_files', experiment.code + '_dense_pointcloud.laz'),
                       '-f', 'filters.reprojection',
