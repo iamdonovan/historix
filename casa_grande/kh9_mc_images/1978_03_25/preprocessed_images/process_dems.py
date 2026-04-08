@@ -17,11 +17,11 @@ for ori in ['RadialBasic', 'RadialExtended', 'FraserBasic', 'FraserExtended', 'F
         'cost_trans': 4,
         'szw': 3,
         'regul': 0.1,
-        'do_ortho': do_ortho
+        'do_ortho': do_ortho,
+        'clean': True
     }
 
     # create the absolute dem/orthophotos
-    # TODO: check if this is too big and iterate if needed
     imlist = sorted(glob(globstr))
     micmac.block_malt(
         imlist,

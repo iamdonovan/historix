@@ -11,7 +11,6 @@ do_ortho = False # whether to make the ortho images
 for ori in ['RadialBasic', 'RadialExtended', 'FraserBasic', 'FraserExtended', 'Final_FraserExtended']:
 
     # create the absolute dem/orthophotos
-    #TODO: check if this is too big and iterate if needed
     micmac.malt(
         globstr.replace('*.', '.*'),
         f"Terrain{ori}",
@@ -19,7 +18,8 @@ for ori in ['RadialBasic', 'RadialExtended', 'FraserBasic', 'FraserExtended', 'F
         zoomf=1,
         cost_trans=4,
         szw=3,
-        regul=0.1
+        regul=0.1,
+        clean=True
     )
 
     # create the orthomosaic
