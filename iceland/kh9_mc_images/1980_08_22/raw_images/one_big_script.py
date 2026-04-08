@@ -34,7 +34,8 @@ micmac.malt(
     zoomf=2,
     cost_trans=4,
     szw=3,
-    regul=0.1
+    regul=0.1,
+    clean=True
 )
 
 imlist = sorted(glob('OIS*.tif'))
