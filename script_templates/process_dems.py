@@ -37,7 +37,7 @@ def main():
     }
 
     # create the absolute dem/orthophotos
-    if args.block_malt:
+    if args.as_block:
         imlist = sorted(glob(args.globstr))
         micmac.block_malt(
             imlist,
