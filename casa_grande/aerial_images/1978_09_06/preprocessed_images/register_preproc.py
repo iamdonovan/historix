@@ -51,7 +51,8 @@ if not Path(f"MEC-Rel{ori}").exists():
 for zoom in ['large', 'zoom']:
     fn_ref = fn_ref_pre / f"{prefix}_orthomosaic_{zoom}.tif"
     fn_dem = fn_dem_pre / f"{prefix}_reference_dem_{zoom}.tif"
-    landmask = fn_dem_pre / f"{prefix}_reference_dem_{zoom}_mask.tif"
+    #landmask = fn_dem_pre / f"{prefix}_reference_dem_{zoom}_mask.tif"
+    landmask = None
 
     # register the images to the reference DEM
     register.register_relative(
