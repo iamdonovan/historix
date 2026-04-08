@@ -19,7 +19,7 @@ cp ori_list.txt $tmpdir
 cd $tmpdir
 
 cat ori_list.txt | while read ori; do
-  python ~/data/historix/scripts/process_dems.py $ori "$globstr" $crs $prefix $cwd #--as_block
+  python ~/data/historix/script_templates/process_dems.py $ori "$globstr" $crs $prefix $cwd #--as_block
 
   rm -r MEC-$ori*
 done
