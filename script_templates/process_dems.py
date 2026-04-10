@@ -27,7 +27,6 @@ def main():
     print(args)
 
     malt_kwargs = {
-        'dirmec': f"MEC-{args.ori}",
         'zoomf': 1,
         'cost_trans': 4,
         'szw': 3,
@@ -38,24 +37,28 @@ def main():
 
     # create the absolute dem/orthophotos
     if args.as_block:
+        nimg = 2
         imlist = sorted(glob(args.globstr))
-        micmac.block_malt(
-            imlist,
-            f"Terrain{args.ori}",
-            nimg=2,
-            malt_kwargs=malt_kwargs
-        )
-        for ind, block in enumerate(glob(f"MEC-{args.ori}_block*/")):
-            # create the orthomosaic
+        inds = range(0, len(imlist) - (nimg - 1), nimg - 1)
+        blocklist = [imlist[ind:ind + nimg] for ind in inds]
+
+        for block, imgs in enumerate(blocklist):
+            micmac.malt(
+                imgs,
+                f"Terrain{args.ori}",
+                dirmec=f"MEC-{args.ori}_block{block}",
+                **malt_kwargs
+            )
+
             if args.do_ortho:
-                micmac.tawny(block)
+                micmac.tawny(f"MEC-{args.ori}_block{block}")
 
             # clean up the outputs
             micmac.post_process(
                 out_dir=Path(args.out_dir, 'post_processed'),
                 projstr=args.local_crs,
-                out_name=f"Terrain{args.ori}_block{ind}",
-                dirmec=block,
+                out_name=f"Terrain{args.ori}_block{block}",
+                dirmec=f"MEC-{args.ori}_block{block}",
                 do_ortho=args.do_ortho,
                 ind_ortho=False,
                 do_ply=True
@@ -68,19 +71,19 @@ def main():
             **malt_kwargs
         )
 
-    if args.do_ortho:
-        micmac.tawny(f"MEC-{args.ori}")
+        if args.do_ortho:
+            micmac.tawny(f"MEC-{args.ori}")
 
-    # clean up the outputs
-    micmac.post_process(
-        out_dir=Path(args.out_dir, 'post_processed'),
-        projstr=args.local_crs,
-        out_name=f"Terrain{args.ori}",
-        dirmec=f"MEC-{args.ori}",
-        do_ortho=args.do_ortho,
-        ind_ortho=False,
-        do_ply=True
-    )
+        # clean up the outputs
+        micmac.post_process(
+            out_dir=Path(args.out_dir, 'post_processed'),
+            projstr=args.local_crs,
+            out_name=f"Terrain{args.ori}",
+            dirmec=f"MEC-{args.ori}",
+            do_ortho=args.do_ortho,
+            ind_ortho=False,
+            do_ply=True
+        )
 
 
 if __name__ == "__main__":
