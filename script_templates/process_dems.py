@@ -18,7 +18,7 @@ def main():
                         help='EPSG code for the output CRS (e.g., 32627).')
     parser.add_argument('prefix', action='store', type=str,
                         help='Prefix for the HISTORIX test cite (should be either CG or IL).')
-    parser.add_argument('out_dir', action='store', type=str,
+    parser.add_argument('-o', '--out_dir', action='store', type=str, default='.',
                         help='Output directory for results.')
     parser.add_argument('--do_ortho', action='store_true',
                         help='Process ortho images as part of Malt (default: False).')
@@ -66,8 +66,10 @@ def main():
                 do_ply=True
             )
 
-            shutil.copy(f"MEC-{args.ori}_block{block}", args.out_dir)
-            os.rmdir(f"MEC-{args.ori}_block{block}")
+            if args.out_dir != '.':
+                shutil.copy(f"MEC-{args.ori}_block{block}", os.path.expanduser(args.out_dir))
+                os.rmdir(f"MEC-{args.ori}_block{block}")
+
     else:
         micmac.malt(
             args.globstr.replace('*.', '.*'),
