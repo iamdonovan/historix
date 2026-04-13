@@ -79,7 +79,7 @@ for experiment in experiments_df.itertuples():
     )
     # convert the sparse pointcloud
     translate_args = ['pdal', 'translate', f"{experiment.ori_final}_sparse.ply",
-                      Path('submision_files', experiment.code + '_sparse_pointcloud.laz'),
+                      Path('submision_files', f"{experiment.code}_sparse_pointcloud.laz"),
                       '-f', 'filters.reprojection',
                       f"--filters.reprojection.in_srs=EPSG:{crs}",
                       f"--filters.reprojection.out_srs=EPSG:{crs}"]
@@ -88,12 +88,12 @@ for experiment in experiments_df.itertuples():
     p.wait()
 
     # now, convert the .ply files using pdal
-    fn_dense_ply = Path('post_processed', f"Terrain{experiment.ori_final}.ply")
+    fn_dense_ply = Path('post_processed', f"{experiment.ori_final}.ply")
 
-    if not Path('post_processed', f"Terrain{experiment.ori_final}.ply").exists():
+    if not Path('post_processed', f"{experiment.ori_final}.ply").exists():
 
-        if len(glob(f"Terrain{experiment.ori_final}_block*.ply", root_dir='post_processed')) > 0:
-            block_ply = sorted(glob(f"Terrain{experiment.ori_final}_block*.ply", root_dir='post_processed'))
+        if len(glob(f"{experiment.ori_final}_block*.ply", root_dir='post_processed')) > 0:
+            block_ply = sorted(glob(f"{experiment.ori_final}_block*.ply", root_dir='post_processed'))
 
             merge_args = ['pdal', 'translate']
             merge_args.extend([Path('post_processed', fn) for fn in block_ply])
