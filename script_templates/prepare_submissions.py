@@ -82,7 +82,7 @@ def main():
 
         # convert the sparse pointcloud
         translate_args = ['pdal', 'translate', f"{experiment.ori_final}_sparse.ply",
-                          Path('submision_files', f"{experiment.code}_sparse_pointcloud.laz"),
+                          Path('submission_files', f"{experiment.code}_sparse_pointcloud.laz"),
                           '-f', 'filters.reprojection',
                           f"--filters.reprojection.in_srs=EPSG:{args.crs}",
                           f"--filters.reprojection.out_srs=EPSG:{args.crs}"]
@@ -102,6 +102,7 @@ def main():
                 merge_args.extend([Path('post_processed', fn) for fn in block_ply])
                 merge_args.append(fn_dense_ply)
 
+                print(merge_args)
                 p = subprocess.Popen(merge_args, stdout=subprocess.PIPE)
                 p.wait()
 
