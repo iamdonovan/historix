@@ -40,7 +40,7 @@ def main():
                                         'lat': ori_df.geometry.y,
                                         'alt': ori_df.geometry.z})
         extrinsics.to_csv(
-            Path('submission_files', '_'.join([experiment.code, 'camera_model_extrinsics.csv'])), index=False
+            Path('submission_files', '_'.join([experiment.code, 'extrinsics.csv'])), index=False
         )
 
         cam_dict = micmac.load_cam_xml(Path(f"Ori-{experiment.ori_final}", experiment.fn_cam))
@@ -77,7 +77,7 @@ def main():
             cols = intrinsics.columns
 
         intrinsics[cols].to_csv(
-            Path('submission_files', '_'.join([experiment.code, 'camera_model_intrinsics.csv'])), index=False
+            Path('submission_files', '_'.join([experiment.code, 'intrinsics.csv'])), index=False
         )
 
         # convert the sparse pointcloud
