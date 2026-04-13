@@ -80,13 +80,6 @@ def main():
             Path('submission_files', '_'.join([experiment.code, 'camera_model_intrinsics.csv'])), index=False
         )
 
-        # create the sparse pointcloud
-        micmac.apericloud(
-            experiment.ori_final,
-            args.globstr.replace('*.', '.*'),
-            fn_out = f"{experiment.ori_final}_sparse.ply",
-            with_cam = False
-        )
         # convert the sparse pointcloud
         translate_args = ['pdal', 'translate', f"{experiment.ori_final}_sparse.ply",
                           Path('submision_files', f"{experiment.code}_sparse_pointcloud.laz"),
