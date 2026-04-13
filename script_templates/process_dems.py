@@ -74,6 +74,7 @@ def main():
         micmac.malt(
             args.globstr.replace('*.', '.*'),
             f"Terrain{args.ori}",
+            dirmec=f"MEC-{args.ori}",
             **malt_kwargs
         )
 
