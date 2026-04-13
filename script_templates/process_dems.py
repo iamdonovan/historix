@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import os
+import shutil
 import argparse
 from pathlib import Path
 from glob import glob
@@ -64,6 +66,8 @@ def main():
                 do_ply=True
             )
 
+            shutil.copy(f"MEC-{args.ori}_block{block}", args.out_dir)
+            os.rmdir(f"MEC-{args.ori}_block{block}")
     else:
         micmac.malt(
             args.globstr.replace('*.', '.*'),
