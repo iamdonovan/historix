@@ -35,7 +35,7 @@ def convert_gcp_measures_csv(fn_csv):
 
         for ind, row in gcps.loc[gcps['image_file_name'] == im].iterrows():
             this_mes = E.OneMesureAF1I(E.NamePt(str(row['gcp_label'])),
-                                       E.PtIm(f"{row['x']} {row['y']}"))
+                                       E.PtIm(f"{row['x']-280} {row['y']-280}"))
             this_im_mes.append(this_mes)
 
         MesureSet.append(this_im_mes)
@@ -48,7 +48,7 @@ globstr = 'DZB*.tif' # fill in image matching pattern for the directory
 imlist = glob(globstr)
 camname = 'KH9MC' # fill in camera name
 shortname = 'KH-9 Hexagon Mapping Camera' # fill in longer camera name
-add_sfs = False # use high-pass filter for finding tie points.
+add_sfs = True # use high-pass filter for finding tie points.
 
 with rio.open(imlist[0]) as src:
     height, width = src.shape
