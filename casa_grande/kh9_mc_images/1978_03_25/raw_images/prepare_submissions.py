@@ -30,7 +30,7 @@ for experiment in experiments_df.itertuples():
                                     'lat': ori_df.geometry.y,
                                     'alt': ori_df.geometry.z})
     extrinsics.to_csv(
-        Path('submission_files', '_'.join([experiment.code, 'camera_model_extrinsics.csv'])), index=False
+        Path('submission_files', '_'.join([experiment.code, 'extrinsics.csv'])), index=False
     )
 
     cam_dict = micmac.load_cam_xml(Path(f"Ori-{experiment.ori_final}", experiment.fn_cam))
@@ -67,7 +67,7 @@ for experiment in experiments_df.itertuples():
         cols = intrinsics.columns
 
     intrinsics[cols].to_csv(
-        Path('submission_files', '_'.join([experiment.code, 'camera_model_intrinsics.csv'])), index=False
+        Path('submission_files', '_'.join([experiment.code, 'intrinsics.csv'])), index=False
     )
 
     # create the sparse pointcloud
@@ -79,7 +79,7 @@ for experiment in experiments_df.itertuples():
     )
     # convert the sparse pointcloud
     translate_args = ['pdal', 'translate', f"{experiment.ori_final}_sparse.ply",
-                      Path('submision_files', experiment.code + '_sparse_pointcloud.laz'),
+                      Path('submission_files', experiment.code + '_sparse_pointcloud.laz'),
                       '-f', 'filters.reprojection',
                       f"--filters.reprojection.in_srs=EPSG:{crs}",
                       f"--filters.reprojection.out_srs=EPSG:{crs}"]
@@ -88,7 +88,19 @@ for experiment in experiments_df.itertuples():
     p.wait()
 
     # now, convert the .ply files using pdal
-    fn_dense_ply = Path('post_processed', f"Terrain{experiment.ori_final}.ply")
+    fn_dense_ply = Path('post_processed', f"{experiment.ori_final}.ply")
+
+    if not Path('post_processed', f"{experiment.ori_final}.ply").exists():
+        block_ply = sorted(glob(f"{experiment.ori_final}_block*.ply", root_dir='post_processed'))
+
+        merge_args = ['pdal', 'merge']
+        merge_args.extend([Path('post_processed', fn) for fn in block_ply])
+        merge_args.append(fn_dense_ply)
+
+        print(merge_args)
+        p = subprocess.Popen(merge_args, stdout=subprocess.PIPE)
+        p.wait()
+
 
     translate_args = ['pdal', 'translate', fn_dense_ply,
                       Path('submission_files', experiment.code + '_dense_pointcloud.laz'),
